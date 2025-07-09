@@ -1,0 +1,29 @@
+<h2>Student Fee Records</h2>
+
+<table border="1" cellpadding="5">
+  <tr>
+    <th>Student</th>
+    <th>Term</th>
+    <th>Amount Due</th>
+    <th>Amount Paid</th>
+    <th>Balance</th>
+    <th>Date</th>
+  </tr>
+  {% for fee in fees %}
+  <tr>
+    <td>{{ fee.student.user.username }}
+    <br>
+    <small>Parent: {{ fee.student.parent.username }}</small>
+</td>
+
+    <td>{{ fee.term }}</td>
+    <td>{{ fee.amount_due }}</td>
+    <td>{{ fee.amount_paid }}</td>
+    <td>{{ fee.balance }}</td>
+    <td>{{ fee.date_recorded }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<p><a href="{% url 'admin_dashboard' %}">← Back to Dashboard</a></p>
+

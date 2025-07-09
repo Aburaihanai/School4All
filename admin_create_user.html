@@ -1,0 +1,8 @@
+<h2>Create New User (Staff / Student / Parent)</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Create User</button>
+</form>
+<p><a href="{% url 'admin_dashboard' %}">Back to Dashboard</a></p>
+

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ student_name }}'s Results{% endblock %}
+
+{% block content %}
+  <h2>{{ student_name }}'s Results</h2>
+  <ul>
+    {% for subject, score in results.items %}
+      <li><strong>{{ subject }}</strong>: {{ score }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

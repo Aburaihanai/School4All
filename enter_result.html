@@ -1,0 +1,9 @@
+<h2>📝 Enter Student Result</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Save Result</button>
+</form>
+
+<p><a href="{% url 'staff_dashboard' %}">← Back</a></p>

@@ -1,0 +1,13 @@
+<h2>{% trans "Welcome {{ user.username }}!" %}</h2>
+<p>{% trans "This is the {{ request.user.userprofile.role }}dashboard." %}</p>
+<h2>{% trans "Welcome {{ user.username }} (Admin)" %}</h2>
+
+<ul>
+  <li><a href="{% url 'admin_create_user' %}">➕ Add Staff/Student/Parent</a></li>
+  <li><a href="{% url 'admin_manage_users' %}">👥 Manage Users</a></li>
+</ul>
+
+<li><a href="{% url 'admin_add_fee' %}">💰 Add Student Fee</a></li>
+<li><a href="{% url 'admin_fee_list' %}">📋 View Fee Records</a></li>
+
+<li><a href="{% url 'admin_unpaid_fees' %}">🚨 View Unpaid Fees</a></li>

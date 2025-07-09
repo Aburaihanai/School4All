@@ -1,0 +1,6 @@
+<h2>Welcome {{ user.username }}!</h2>
+<p>You are logged in.</p>
+
+{% if user.userprofile.role == 'parent' %}
+    <a href="{% url 'parent_dashboard' %}">👨‍👧 Parent Dashboard</a>
+{% endif %}

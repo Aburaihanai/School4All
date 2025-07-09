@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}{{ school.name }} Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">{{ school.name }} - Dashboard</h2>
+
+  <!-- Statistics Cards -->
+  <div class="row text-center mb-4">
+    <div class="col-md-4">
+      <div class="card bg-success text-white shadow">
+        <div class="card-body">
+          <h4>Total Students</h4>
+          <p class="display-6">{{ total_students }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-primary text-white shadow">
+        <div class="card-body">
+          <h4>Total Staff</h4>
+          <p class="display-6">{{ total_staff }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card bg-warning text-dark shadow">
+        <div class="card-body">
+          <h4>Total Fees Collected</h4>
+          <p class="display-6">₦{{ total_fees_collected|floatformat:2 }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fee Chart -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">📊 Fee Statistics</h5>
+      <canvas id="feeChart" height="100"></canvas>
+    </div>
+  </div>
+
+  <!-- Gallery -->
+  <h4 class="mt-5 mb-3">🎨 Gallery</h4>
+  <div class="row">
+    {% for img in gallery_images %}
+      <div class="col-md-3 mb-3">
+        <img src="{{ img.image.url }}" class="img-fluid rounded shadow" alt="Gallery Image">
+      </div>
+    {% empty %}
+      <p class="text-muted">No gallery images yet.</p>
+    {% endfor %}
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('feeChart').getContext('2d');
+  const feeChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: {{ chart_labels|safe }},
+      datasets: [{
+        label: 'Fees Paid (₦)',
+        data: {{ chart_data|safe }},
+        backgroundColor: ['#28a745', '#007bff', '#ffc107'],
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+</script>
+
+{% for img in gallery_images %}
+  <div class="col-md-3 mb-3">
+    <img src="{{ img.image.url }}" class="img-fluid rounded shadow" alt="Gallery Image">
+  </div>
+{% empty %}
+  <p class="text-muted">No gallery images yet.</p>
+{% endfor %}

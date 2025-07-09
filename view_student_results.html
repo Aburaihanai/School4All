@@ -1,0 +1,24 @@
+<h2>📄 Results for {{ student.user.username }}</h2>
+
+{% if results %}
+<table border="1" cellpadding="5">
+  <tr>
+    <th>Term</th>
+    <th>Subject</th>
+    <th>Score</th>
+    <th>Date Recorded</th>
+  </tr>
+  {% for result in results %}
+  <tr>
+    <td>{{ result.term }}</td>
+    <td>{{ result.subject }}</td>
+    <td>{{ result.score }}</td>
+    <td>{{ result.date_recorded }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+  <p>No results found yet.</p>
+{% endif %}
+
+<p><a href="{% url 'admin_dashboard' %}">← Back</a></p>

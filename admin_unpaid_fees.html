@@ -1,0 +1,43 @@
+<h2>📢 Students with Unpaid Fees</h2>
+
+{% if fees %}
+<table border="1" cellpadding="5">
+  <tr>
+    <th>Student</th>
+    <th>Term</th>
+    <th>Amount Due</th>
+    <th>Paid</th>
+    <th>Balance</th>
+    <th>Parent Username</th>
+    <th>Parent Contact</th>
+  </tr>
+  {% for fee in fees %}
+  <tr>
+    <td>{{ fee.student.user.username }}
+    <br>
+    <small>Parent: {{ fee.student.parent.username }}</small>
+</td>
+
+    <td>{{ fee.term }}</td>
+    <td>{{ fee.amount_due }}</td>
+    <td>{{ fee.amount_paid }}</td>
+    <td>{{ fee.balance }}</td>
+    <td>
+      {% with parent=fee.student.userprofile_set.get(role='parent') %}
+        {{ parent.user.username }}
+      {% endwith %}
+    </td>
+    <td>
+      {% with parent=fee.student.userprofile_set.get(role='parent') %}
+        {{ parent.contact_email }}
+      {% endwith %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+  <p>✅ All students have paid fully.</p>
+{% endif %}
+
+<p><a href="{% url 'admin_dashboard' %}">← Back to Dashboard</a></p>
+

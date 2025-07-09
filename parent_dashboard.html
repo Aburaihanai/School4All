@@ -1,0 +1,37 @@
+<h2>👨‍👩‍👧 Welcome {{ user.username }} - Parent Dashboard</h2>
+
+<h3>👧 Your Children</h3>
+<ul>
+  {% for child in children %}
+    <li>
+      {{ child.user.username }} — 
+      <a href="{% url 'view_student_results' child.id %}">📄 View Results</a>
+    </li>
+  {% empty %}
+    <li>No children linked.</li>
+  {% endfor %}
+</ul>
+
+
+<h3>💰 Fee Records</h3>
+<table border="1" cellpadding="5">
+  <tr>
+    <th>Child</th>
+    <th>Term</th>
+    <th>Amount Due</th>
+    <th>Amount Paid</th>
+    <th>Balance</th>
+  </tr>
+  {% for fee in fees %}
+  <tr>
+    <td>{{ fee.student.user.username }}</td>
+    <td>{{ fee.term }}</td>
+    <td>{{ fee.amount_due }}</td>
+    <td>{{ fee.amount_paid }}</td>
+    <td>{{ fee.balance }}</td>
+  </tr>
+  {% empty %}
+    <tr><td colspan="5">No fee records found.</td></tr>
+  {% endfor %}
+</table>
+
